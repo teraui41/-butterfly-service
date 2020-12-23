@@ -1,0 +1,11 @@
+{
+  "name": "-butterfly-service",
+  "version": "1.0.0",
+  "description": "api service of butterfly advanture",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edmond",
+  "license": "ISC"
+}
