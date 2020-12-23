@@ -1,5 +1,5 @@
 const express = require("express");
-const isEmpty = require("lodash");
+const {isEmpty, pick} = require("lodash");
 const { userModel } = require("../models");
 const { saltHashPassword, generateToken } = require("../utils/authUtil");
 const { successResponse, errorResponse } = require("../utils/responseUtil");
@@ -8,13 +8,15 @@ const router = express.Router();
 
 const login = async (req, res) => {
   try {
-    const user = userModel.findOne({ account });
-
-    if (isEmpty(user)) return errorResponse(res, 400, "使用者不存在");
+    const { account, password } = req.body;
+    const user = await userModel.findOne({ account });
+    if (isEmpty(user)) {
+      return errorResponse(res, 400, "使用者不存在");
+    }
 
     const hashPassword = saltHashPassword(password, process.env.SALT_SECRET);
 
-    if (hashPassword !== user.hashPassword)
+    if (hashPassword !== user.password)
       return errorResponse(res, 400, "驗證失敗");
 
     const signInfo = pick(user, ["uuid", "account"]);

@@ -1,1 +1,21 @@
-@DEV = http://localhost:8000/
+@domain = http://localhost:8099/
+@jsonContentType = application/json
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzYwMzJiYWE0Nzg1MjkxZWIxN2FjYSIsImFjY291bnQiOiJlZG1vbmQxIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS9Yb3UyeHpULnBuZyIsIm5hbWUiOiJFRE1PTkQxIiwiaWF0IjoxNjA2ODE2OTgxfQ.uvblxt3cBC0x3sEtaAtdeV_Cs6OP8JxoelCqtWlB824
+
+### login
+POST {{domain}}auth/login
+Content-Type: {{jsonContentType}}
+
+{
+  "account": "admin",
+  "password": "admin123"
+}
+
+### register account
+POST {{domain}}user/register
+Content-Type: {{jsonContentType}}
+
+{
+  "account": "admin",
+  "password": "admin123"
+}

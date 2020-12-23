@@ -1,4 +1,4 @@
-Butter Fly Adventure
+Butterfly Adventure
 ===
 
 Active server:
@@ -6,5 +6,3 @@ Active server:
 ```shell
 pm2 server.js
 ```
-
-

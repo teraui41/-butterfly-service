@@ -10,11 +10,14 @@ const userRoute = require('./router/userRoute');
 const reportRoute = require('./router/reportRoute');
 const answerRouter = require('./router/answerRoute');
 
+const port = process.env.PORT || 8099;
+
 const {jwtAuthorizationMiddleware} = require("./managers/passportManager");
 
 const {REDIS_PORT, REDIS_HOST, AUTH_SECRET} = process.env;
 
 const app = express();
+const server = require('http').createServer(app);
 
 const RedisStore = connectRedis(session);
 let redisClient = redis.createClient();
@@ -41,5 +44,9 @@ app.use(session({
 
 app.use('/auth', authRoute);
 app.use('/answer', answerRouter);
-app.use('/user', jwtAuthorizationMiddleware, userRoute);
+app.use('/user', userRoute);
 app.use('/report', jwtAuthorizationMiddleware, reportRoute);
+
+server.listen(port, () => {
+  console.log('Server listening at port %d', port);
+});

@@ -24,8 +24,8 @@ const userValidSchema = yup.object().shape({
 const register = async (req, res) => {
   try {
     const { body } = req;
-    await userValidSchema.valid(body);
-
+    await userValidSchema.validate(body);
+    const { account, password } = body;
     const existedUser = await userModel.findOne({
       account: { $eq: account },
     });
@@ -36,8 +36,8 @@ const register = async (req, res) => {
 
     const user = new userModel({
       uuid,
-      account: req.account,
-      password: saltHashPassword(req.password),
+      account,
+      password: saltHashPassword(password),
       createTime: new Date(),
     });
 

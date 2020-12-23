@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const userSchema = require('./userSchema');
 const answerSchema = require('./answerSchema');
-const userModel = mongoose.model('user', userSchema);
+const userModel = mongoose.model('users', userSchema);
 const answerModel = mongoose.model('answer', answerSchema);
 const {
   MONGO_URI,
