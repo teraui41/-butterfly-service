@@ -1,6 +1,6 @@
 @domain = http://localhost:8099/
 @jsonContentType = application/json
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmYzYwMzJiYWE0Nzg1MjkxZWIxN2FjYSIsImFjY291bnQiOiJlZG1vbmQxIiwiYXZhdGFyIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS9Yb3UyeHpULnBuZyIsIm5hbWUiOiJFRE1PTkQxIiwiaWF0IjoxNjA2ODE2OTgxfQ.uvblxt3cBC0x3sEtaAtdeV_Cs6OP8JxoelCqtWlB824
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWZlMzE4MDAxOTg2OTU4ZDNjMTAyZTIwIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjA4ODAwNzc2fQ.D2cdQELNoi4jMY5HopYj9b4mqK7-_kIK7I5So6Dt5vU
 
 ### login
 POST {{domain}}auth/login
@@ -14,8 +14,9 @@ Content-Type: {{jsonContentType}}
 ### register account
 POST {{domain}}user/register
 Content-Type: {{jsonContentType}}
+Authorization: Bearer {{token}}
 
 {
-  "account": "admin",
-  "password": "admin123"
+  "account": "edmond",
+  "password": "edmond123"
 }

@@ -1,10 +1,11 @@
-const dotenv = require("dotenv").config();
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const redis = require('redis')
-const connectRedis = require('connect-redis');
-const session = require('express-session');
+const passport = require('passport');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const connectRedis = require('connect-redis');
 const authRoute = require('./router/authRoute');
 const userRoute = require('./router/userRoute');
 const reportRoute = require('./router/reportRoute');
@@ -42,9 +43,12 @@ app.use(session({
   }
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/auth', authRoute);
 app.use('/answer', answerRouter);
-app.use('/user', userRoute);
+app.use('/user', jwtAuthorizationMiddleware, userRoute);
 app.use('/report', jwtAuthorizationMiddleware, reportRoute);
 
 server.listen(port, () => {

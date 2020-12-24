@@ -31,6 +31,11 @@ const login = async (req, res) => {
   }
 };
 
+
+router.get('/errAuth', function(req, res) {
+  res.json({ message: 'hello' });
+});
+
 router.post("/login", login);
 
 module.exports = router;

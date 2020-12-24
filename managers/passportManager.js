@@ -3,6 +3,7 @@ const passportJWT = require("passport-jwt");
 const isEmpty = require("lodash/isEmpty");
 const LocalStrategy = require("passport-local").Strategy;
 const { saltHashPassword } = require("../utils/authUtil");
+const { userModel } = require('../models');
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -58,8 +59,8 @@ passport.use(
     },
     async function(jwtPayload, done) {
       try {
-        const { id } = jwtPayload;
-        const user = await getBackendUserById(id);
+        const { account } = jwtPayload;
+        const user = await userModel.findOne({ account });
 
         if (isEmpty(user)) {
           const notAuthError = new Error("使用者不存在，請重新登入。");
@@ -71,7 +72,7 @@ passport.use(
       } catch (error) {
         const notAuthError = new Error("帳號驗證錯誤，請聯繫管理人員。");
         notAuthError.status = 401;
-        return done(notAuthError);
+        return done(notAuthError, false);
       }
     }
   )
@@ -86,5 +87,5 @@ passport.deserializeUser((user, done) => {
 });
 
 module.exports.jwtAuthorizationMiddleware = passport.authenticate("jwt", {
-  session: true
+  session: true,
 });
