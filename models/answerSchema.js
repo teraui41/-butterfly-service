@@ -8,13 +8,16 @@ const answerSchema = new Schema({
   },
   bedNo: {
     type: Schema.Types.String,
-    enum: ['tw', 'en', 'vn', 'id'] // tw: 繁體中文, en: English, vn: Việt Ngữ, id: Bahasa Indonesia
+    required: true,
   },
   language: {
     type: Schema.Types.String,
+    enum: ['tw', 'en', 'vn', 'id'], // tw: 繁體中文, en: English, vn: Việt Ngữ, id: Bahasa Indonesia
+    default: 'tw'
   },
   answers: {
     type: Schema.Types.Array,
+    required: true,
   },
   createTime: {
     type: Schema.Types.Date,

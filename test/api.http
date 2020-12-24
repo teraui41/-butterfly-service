@@ -20,3 +20,30 @@ Authorization: Bearer {{token}}
   "account": "edmond",
   "password": "edmond123"
 }
+
+### getToken 
+POST {{domain}}auth/token
+Content-Type: {{jsonContentType}}
+
+{
+  "clientId": "ZWRtb25kOmdvb2RndXk=",
+  "bedNo": "A9908",
+  "language": "tw"
+}
+
+### sendAnswer
+POST {{domain}}answer
+Content-Type: {{jsonContentType}}
+Authorization: Bearer {{token}}
+
+{
+  "bedNo": "A9908",
+  "language": "tw",
+  "answers": [ 1, 1, 1, 0, 0]
+}
+
+### getAllAnswer
+GET {{domain}}report
+Content-Type: {{jsonContentType}}
+Authorization: Bearer {{token}}
+
