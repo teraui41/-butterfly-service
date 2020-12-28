@@ -5,8 +5,9 @@ const tokenVerifyMiddleware =  async (req, res, next) => {
     const authorization = req.headers.authorization;
     const token = authorization.split(' ')[1];
     const user = await agServer.auth.verifyToken(token, agServer.signatureKey);
-    
+
     req.user = user;
+    
     next();
   } catch(error) {
     return res.status(401).json({
