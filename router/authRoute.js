@@ -36,10 +36,6 @@ const login = async (req, res) => {
     const signInfo = pick(user, ["uuid", "account"]);
     const token = generateToken(signInfo);
 
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    
     return successResponse(res, {
       token,
       account: user.account,
