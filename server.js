@@ -47,7 +47,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRoute);
-app.use('/user', userRoute);
+app.use('/user', jwtAuthorizationMiddleware, userRoute);
 app.use('/report', jwtAuthorizationMiddleware, reportRoute);
 app.use('/answer', jwtAuthorizationMiddleware, answerRouter);
 

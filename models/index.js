@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 const dbUrl = `${MONGO_URI}:${MONGO_PORT}/${MONGO_DATABASE}?poolSize=${MONGO_POOL_SIZE}&replicaSet=mongo1`;
-console.log("TCL ~ file: index.js ~ line 14 ~ dbUrl", dbUrl)
+console.log("Mongo DB run at: ", dbUrl)
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true,});
 
