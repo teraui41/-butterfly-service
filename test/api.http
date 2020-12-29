@@ -16,7 +16,6 @@ Content-Type: {{jsonContentType}}
 ### register account
 POST {{domain}}user/register
 Content-Type: {{jsonContentType}}
-Authorization: Bearer {{token}}
 
 {
   "account": "admin",

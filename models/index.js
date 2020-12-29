@@ -10,6 +10,7 @@ const {
   MONGO_POOL_SIZE,
 } = process.env;
 
+console.log("TCL ~ file: index.js ~ line 14 ~ dbUrl", dbUrl)
 const dbUrl = `${MONGO_URI}:${MONGO_PORT}/${MONGO_DATABASE}?poolSize=${MONGO_POOL_SIZE}`;
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true,});
