@@ -1,6 +1,6 @@
 # @domain = http://localhost:8099/
-# @domain = https://butterfly-service.teraui.com/
-@domain = http://172.105.238.45:8099/
+@domain = https://butterfly-service.teraui.com/
+# @domain = http://172.105.238.45:8099/
 @jsonContentType = application/json
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWZlMzE4MDAxOTg2OTU4ZDNjMTAyZTIwIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjA4ODAwNzc2fQ.D2cdQELNoi4jMY5HopYj9b4mqK7-_kIK7I5So6Dt5vU
 
