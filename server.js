@@ -10,10 +10,12 @@ const authRoute = require("./router/authRoute");
 const userRoute = require("./router/userRoute");
 const reportRoute = require("./router/reportRoute");
 const answerRouter = require("./router/answerRoute");
+const domainVerifyMiddleware = require("./middleware/domainVerifyMiddleware");
 
 const port = process.env.PORT || 8099;
 
 const { jwtAuthorizationMiddleware } = require("./managers/passportManager");
+
 
 const { REDIS_PORT, REDIS_HOST, AUTH_SECRET } = process.env;
 
@@ -52,7 +54,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(domainVerifyMiddleware);
 app.use("/auth", authRoute);
 app.use("/user", jwtAuthorizationMiddleware, userRoute);
 app.use("/report", jwtAuthorizationMiddleware, reportRoute);
