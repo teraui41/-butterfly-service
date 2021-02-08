@@ -14,7 +14,7 @@ const domainVerifyMiddleware = require("./middleware/domainVerifyMiddleware");
 
 const port = process.env.PORT || 8099;
 
-const { jwtAuthorizationMiddleware } = require("./managers/passportManager");
+const { jwtAuthorizationMiddleware, jwtUserAuthorizationMiddleware } = require("./managers/passportManager");
 
 
 const { REDIS_PORT, REDIS_HOST, AUTH_SECRET } = process.env;
@@ -58,7 +58,7 @@ app.use(domainVerifyMiddleware);
 app.use("/auth", authRoute);
 app.use("/user", jwtAuthorizationMiddleware, userRoute);
 app.use("/report", jwtAuthorizationMiddleware, reportRoute);
-app.use("/answer", jwtAuthorizationMiddleware, answerRouter);
+app.use("/answer", jwtUserAuthorizationMiddleware, answerRouter);
 
 server.listen(port, () => {
   console.log("Server listening at port %d", port);

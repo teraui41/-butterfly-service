@@ -51,7 +51,7 @@ passport.use(
   )
 );
 
-passport.use(
+passport.use('admin-rule',
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
@@ -78,6 +78,33 @@ passport.use(
   )
 );
 
+
+passport.use('user-rule',
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: AUTH_SECRET
+    },
+    async function(jwtPayload, done) {
+      try {
+        const { bedNo, language } = jwtPayload;
+
+        if (isEmpty(bedNo) || isEmpty(language)) {
+          const notAuthError = new Error("請重新進入遊戲。");
+          notAuthError.status = 401;
+          return done(notAuthError);
+        }
+
+        done(null, { bedNo, language }, { message: "登入成功" });
+      } catch (error) {
+        const notAuthError = new Error("請重新進入遊戲。");
+        notAuthError.status = 401;
+        return done(notAuthError, false);
+      }
+    }
+  )
+);
+
 passport.serializeUser((user, done) => {
   done(null, user);
 });
@@ -86,6 +113,10 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
-module.exports.jwtAuthorizationMiddleware = passport.authenticate("jwt", {
+module.exports.jwtAuthorizationMiddleware = passport.authenticate("admin-rule", {
+  session: true,
+});
+
+module.exports.jwtUserAuthorizationMiddleware = passport.authenticate("user-rule", {
   session: true,
 });
