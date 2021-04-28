@@ -10,7 +10,7 @@ const {
   MONGO_POOL_SIZE,
 } = process.env;
 
-const dbUrl = `${MONGO_URI}:${MONGO_PORT}/${MONGO_DATABASE}?poolSize=${MONGO_POOL_SIZE}&replicaSet=mongo1`;
+const dbUrl = `${MONGO_URI}:${MONGO_PORT}/${MONGO_DATABASE}`;
 console.log("Mongo DB run at: ", dbUrl)
 
 mongoose.connect(dbUrl, {useNewUrlParser: true, useUnifiedTopology: true,});
