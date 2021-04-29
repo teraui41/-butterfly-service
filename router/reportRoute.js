@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { answerModel } = require("../models");
+const { getDateRange } = require('../utils/formatUtil');
 const { successResponse, errorResponse } = require("../utils/responseUtil");
 
 const report = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req;
+    const { page = 1, limit = 10, startDate = null, endDate = null } = req.body;
 
     const options = {
       page,
@@ -13,11 +14,15 @@ const report = async (req, res) => {
       sort: [["createTime", -1]],
     }
 
+    const query = {
+      ...getDateRange(startDate, endDate),
+    }
+
     const records = await answerModel
-      .paginate({}, options);
+      .paginate(query, options);
 
     return successResponse(res, {
-      message: `提交成功`,
+      message: '查詢成功',
       records,
     });
   } catch (error) {

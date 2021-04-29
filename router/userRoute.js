@@ -23,10 +23,44 @@ const userValidSchema = yup.object().shape({
 
 const list = async (req, res) => {
   try {
-    const { body } = req;
-    const users = await userMo
+    const { page = 1, limit = 10 } = req.body;
+
+    const options = {
+      page,
+      limit,
+      sort: [["createTime", -1]],
+    }
+
+    const users = await userModel.paginate({}, options);
+    return successResponse(res, {
+      message: '查詢成功',
+      users,
+    });
   }catch(error) {
-    
+    return errorResponse(res, 403, error.message);
+  }
+}
+
+const update = async (req, res) => {
+  try {
+    const { status, uuid, username } = req.body;
+
+    const existedUser = await userModel.findOne({
+      uuid: { $eq: uuid },
+    });
+
+    if(isEmpty(existedUser)) return errorResponse(res, 400, "查無帳號");
+
+    existedUser.status = status;
+    existedUser.username = username;
+    await existedUser.save();
+
+    return successResponse(res, {
+      message: `帳號更新成功: ${user.account}`,
+      data: existedUser,
+    });
+  }catch(error) {
+    return errorResponse(res, 403, error.message);
   }
 }
 
@@ -46,6 +80,8 @@ const register = async (req, res) => {
     const user = new userModel({
       uuid,
       account,
+      username,
+      status: 1,
       password: saltHashPassword(password),
       createTime: new Date(),
     });
@@ -59,6 +95,8 @@ const register = async (req, res) => {
   }
 };
 
+router.post('/list', list);
+router.put("/update", update);
 router.post("/register", register);
 
 module.exports = router;
