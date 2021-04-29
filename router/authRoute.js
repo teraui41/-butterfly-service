@@ -45,6 +45,15 @@ const login = async (req, res) => {
   }
 };
 
+const logout = async (req, res) => {
+  try {
+    req.logout();
+    return successResponse(res);
+  }catch(error) {
+    return errorResponse(res);
+  }
+}
+
 const getToken = async (req, res) => {
   try {
     const { CLIENT_ID } = process.env;
@@ -68,6 +77,7 @@ const getToken = async (req, res) => {
 }
 
 router.post("/login", login);
+router.post("/logout", logout);
 router.post("/token", getToken);
 
 module.exports = router;

@@ -21,6 +21,15 @@ const userValidSchema = yup.object().shape({
     .required("密碼不可為空"),
 });
 
+const list = async (req, res) => {
+  try {
+    const { body } = req;
+    const users = await userMo
+  }catch(error) {
+    
+  }
+}
+
 const register = async (req, res) => {
   try {
     const { body } = req;

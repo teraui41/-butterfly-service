@@ -5,7 +5,16 @@ const { successResponse, errorResponse } = require("../utils/responseUtil");
 
 const report = async (req, res) => {
   try {
-    const records = await answerModel.find({}, { _id: false, __v: false }).sort([['createTime', -1]]);
+    const { page = 1, limit = 10 } = req;
+
+    const options = {
+      page,
+      limit,
+      sort: [["createTime", -1]],
+    }
+
+    const records = await answerModel
+      .paginate({}, options);
 
     return successResponse(res, {
       message: `提交成功`,
