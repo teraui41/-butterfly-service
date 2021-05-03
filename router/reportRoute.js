@@ -6,7 +6,7 @@ const { successResponse, errorResponse } = require("../utils/responseUtil");
 
 const report = async (req, res) => {
   try {
-    const { page = 1, limit = 10, startDate = null, endDate = null } = req.body;
+    const { page = 1, limit = 10, startDate = null, endDate = null } = req.query;
 
     const options = {
       page,
