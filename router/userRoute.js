@@ -23,7 +23,7 @@ const userValidSchema = yup.object().shape({
 
 const list = async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.body;
+    const { page = 1, limit = 10 } = req.query;
 
     const options = {
       page,
@@ -95,7 +95,7 @@ const register = async (req, res) => {
   }
 };
 
-router.post('/list', list);
+router.get('/list', list);
 router.put("/update", update);
 router.post("/register", register);
 
