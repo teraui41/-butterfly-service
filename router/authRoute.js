@@ -23,7 +23,8 @@ const memberValidSchema = yup.object().shape({
 const login = async (req, res) => {
   try {
     const { account, password } = req.body;
-    const user = await userModel.findOne({ account });
+    const user = await userModel.findOne({ account }).select('+password');
+
     if (isEmpty(user)) {
       return errorResponse(res, 400, "使用者不存在");
     }

@@ -1,7 +1,7 @@
 const yup = require("yup");
 const express = require("express");
 const mongoose = require("mongoose");
-const isEmpty = require("lodash");
+const isEmpty = require("lodash/isEmpty");
 const { userModel } = require("../models");
 const { saltHashPassword } = require("../utils/authUtil");
 const { successResponse, errorResponse } = require("../utils/responseUtil");
@@ -31,10 +31,10 @@ const list = async (req, res) => {
       sort: [["createTime", -1]],
     }
 
-    const users = await userModel.paginate({}, options);
+    const records = await userModel.paginate({}, options);
     return successResponse(res, {
       message: '查詢成功',
-      users,
+      records,
     });
   }catch(error) {
     return errorResponse(res, 403, error.message);
@@ -46,7 +46,7 @@ const update = async (req, res) => {
     const { status, uuid, username } = req.body;
 
     const existedUser = await userModel.findOne({
-      uuid: { $eq: uuid },
+      uuid,
     });
 
     if(isEmpty(existedUser)) return errorResponse(res, 400, "查無帳號");
@@ -56,7 +56,7 @@ const update = async (req, res) => {
     await existedUser.save();
 
     return successResponse(res, {
-      message: `帳號更新成功: ${user.account}`,
+      message: `帳號更新成功: ${existedUser.account}`,
       data: existedUser,
     });
   }catch(error) {

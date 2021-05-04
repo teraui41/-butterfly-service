@@ -22,6 +22,7 @@ const userSchema = new Schema({
   password: {
     type: Schema.Types.String,
     require: true,
+    select: false,
   },
   createTime: {
     type: Schema.Types.Date,
