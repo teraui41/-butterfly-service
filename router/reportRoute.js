@@ -15,7 +15,7 @@ const report = async (req, res) => {
     }
 
     const query = {
-      ...getDateRange(startDate, endDate),
+      ...getDateRange('createTime', startDate, endDate),
     }
 
     const records = await answerModel
