@@ -40,6 +40,7 @@ const login = async (req, res) => {
     return successResponse(res, {
       token,
       account: user.account,
+      username: user.username
     });
   } catch (error) {
     return errorResponse(res);
