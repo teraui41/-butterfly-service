@@ -2,7 +2,7 @@
 # @domain = https://butterfly-service.teraui.com/
 # @domain = http://172.105.238.45:8099/
 @jsonContentType = application/json
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiNWZlMzE4MDAxOTg2OTU4ZDNjMTAyZTIwIiwiYWNjb3VudCI6ImFkbWluIiwiaWF0IjoxNjA4ODAwNzc2fQ.D2cdQELNoi4jMY5HopYj9b4mqK7-_kIK7I5So6Dt5vU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJiZWRObyI6IkE5OTA4IiwibGFuZ3VhZ2UiOiJ0dyIsImlhdCI6MTYyMTMyNDQzNH0.OXpCLqvlVJGND2a0wWYTf7VHXPTt0lDT-n2yvdIF1SM
 
 ### login
 POST {{domain}}auth/login
@@ -44,6 +44,11 @@ Authorization: Bearer {{token}}
   "answers": [ 1, 1, 1, 0, 0]
 }
 
+### sync google
+POST {{domain}}answer/sync
+Content-Type: {{jsonContentType}}
+Authorization: Bearer {{token}}
+
 ### getAllAnswer
 GET {{domain}}report
 Content-Type: {{jsonContentType}}
@@ -56,3 +61,9 @@ Content-Type: {{jsonContentType}}
 ### add visitor
 POST {{domain}}visit/visit
 Content-Type: {{jsonContentType}}
+
+### dashboard
+GET {{domain}}report/dashboard
+Content-Type: {{jsonContentType}}
+Authorization: Bearer {{token}}
+

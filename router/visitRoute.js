@@ -38,6 +38,7 @@ const visitor = async (req, res) => {
 const getVisitorByDate = async (req, res) => {
   try {
     const { startDate, endDate } = req.query;
+    
     const records = await visitorModel.findOne({
         ...getDateRange("createTime", startDate, endDate),
     });

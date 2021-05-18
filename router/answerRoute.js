@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { answerModel } = require("../models");
 const { successResponse, errorResponse } = require("../utils/responseUtil");
-
 const router = express.Router();
 
 const addAnswer = async (req, res) => {
