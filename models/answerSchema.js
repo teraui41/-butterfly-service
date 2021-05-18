@@ -20,6 +20,10 @@ const answerSchema = new Schema({
     type: Schema.Types.Array,
     required: true,
   },
+  remark: {
+    type: Schema.Types.String,
+    default: '',
+  },
   createTime: {
     type: Schema.Types.Date,
   },

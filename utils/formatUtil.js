@@ -1,8 +1,14 @@
 const { isEmpty } = require("lodash");
+const { getDateWithoutTime } = require("./dateUtil");
 
-const getDateRange = (startDate, endDate) => {
+const getDateRange = (fieldName, startDate, endDate) => {
   if (isEmpty(startDate) || isEmpty(endDate)) return {};
-  return { startDate, endDate };
+  return {
+    [fieldName]: {
+      $gte: getDateWithoutTime(startDate),
+      $lte: getDateWithoutTime(endDate),
+    },
+  };
 };
 
 module.exports.getDateRange = getDateRange;

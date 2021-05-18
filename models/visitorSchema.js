@@ -1,23 +1,13 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require('mongoose-paginate-v2');
+const { getDateWithoutTime } = require('../utils/dateUtil');
 const { Schema } = mongoose;
 
 const visitorSchema = new Schema({
-  uuid: {
-    type: Schema.Types.String,
+  createTime: {
+    type: Schema.Types.Date,
+    default: getDateWithoutTime(),
     primary: true,
-  },
-  visitYear: {
-    type: Schema.Types.String,
-    default: '',
-  },
-  visitMonth: {
-    type: Schema.Types.String,
-    default: '',
-  },
-  visitDay: {
-    type: Schema.Types.String,
-    default: '',
   },
   count: {
     type: Schema.Types.Number,
